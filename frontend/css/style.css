@@ -1,6 +1,21 @@
-body {
-  background: #f7f7f8;
+:root {
+  --fundo: #eef1f5;
+  --card: #ffffff;
+  --borda: #e3e7ed;
+  --texto: #1c2230;
+  --link: #4a5263;
+  --azul: #3157f5;
 }
+ 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+body {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  padding: 16px;
+}
+ 
 
 .hero {
     background: linear-gradient(135deg, #111, #343a40);
@@ -20,6 +35,18 @@ body {
         font-size: 1.8rem;
     }
 }
+.acoes button:hover,
+.acoes a:hover { color: var(--azul); }
+.acoes svg { width: 22px; height: 22px; }
+ 
+:focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
+ 
+/* Responsivo */
+@media (max-width: 720px) {
+  .header { padding: 12px 16px; }
+  .menu { display: none; }
+  .acoes { margin-left: auto; }
+} 
 
 .navbar {
     display: flex;
