@@ -1,1 +1,87 @@
-<?php require_once __DIR__.'/../../config/database.php';session_start();header('Content-Type: application/json; charset=utf-8');if(empty($_SESSION['user_id'])){http_response_code(401);echo json_encode(['error'=>'Login obrigatório']);exit;}$pdo=db();try{$pdo->beginTransaction();$s=$pdo->prepare('SELECT id FROM carts WHERE user_id=?');$s->execute([$_SESSION['user_id']]);$cart=$s->fetch();if(!$cart)throw new Exception('Carrinho vazio');$s=$pdo->prepare('SELECT ci.*,p.name,p.price,p.stock,p.active FROM cart_items ci JOIN products p ON p.id=ci.product_id WHERE ci.cart_id=? FOR UPDATE');$s->execute([$cart['id']]);$items=$s->fetchAll();if(!$items)throw new Exception('Carrinho vazio');$total=0;foreach($items as $i){if(!$i['active']||$i['stock']<$i['quantity'])throw new Exception('Estoque insuficiente para '.$i['name']);$total += $i['price']*$i['quantity'];}$s=$pdo->prepare('INSERT INTO orders(user_id,total) VALUES(?,?)');$s->execute([$_SESSION['user_id'],$total]);$oid=$pdo->lastInsertId();$oi=$pdo->prepare('INSERT INTO order_items(order_id,product_id,product_name,unit_price,quantity) VALUES(?,?,?,?,?)');$up=$pdo->prepare('UPDATE products SET stock=stock-? WHERE id=?');foreach($items as $i){$oi->execute([$oid,$i['product_id'],$i['name'],$i['price'],$i['quantity']]);$up->execute([$i['quantity'],$i['product_id']]);}$pdo->prepare('DELETE FROM cart_items WHERE cart_id=?')->execute([$cart['id']]);$pdo->commit();echo json_encode(['message'=>'Pedido criado','order_id'=>$oid]);}catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();http_response_code(422);echo json_encode(['error'=>$e->getMessage()]);}
+<?php
+
+require_once __DIR__ . '/../../config/database.php';
+
+session_start();
+header('Content-Type: application/json; charset=utf-8');
+
+if (empty($_SESSION['user_id'])) {
+	http_response_code(401);
+	echo json_encode(['error' => 'Login obrigatório']);
+	exit;
+}
+
+$pdo = db();
+
+try {
+	$pdo->beginTransaction();
+
+	$cartQuery = $pdo->prepare('SELECT id FROM carts WHERE user_id = ?');
+	$cartQuery->execute([$_SESSION['user_id']]);
+	$cart = $cartQuery->fetch();
+
+	if (!$cart) {
+		throw new Exception('Carrinho vazio');
+	}
+
+	$itemsQuery = $pdo->prepare(
+		'SELECT ci.*, p.name, p.price, p.stock, p.active '
+		. 'FROM cart_items ci '
+		. 'JOIN products p ON p.id = ci.product_id '
+		. 'WHERE ci.cart_id = ? FOR UPDATE'
+	);
+	$itemsQuery->execute([$cart['id']]);
+	$items = $itemsQuery->fetchAll();
+
+	if (!$items) {
+		throw new Exception('Carrinho vazio');
+	}
+
+	$total = 0;
+
+	foreach ($items as $item) {
+		if (!$item['active'] || $item['stock'] < $item['quantity']) {
+			throw new Exception('Estoque insuficiente para ' . $item['name']);
+		}
+
+		$total += $item['price'] * $item['quantity'];
+	}
+
+	$orderQuery = $pdo->prepare('INSERT INTO orders (user_id, total) VALUES (?, ?)');
+	$orderQuery->execute([$_SESSION['user_id'], $total]);
+	$orderId = $pdo->lastInsertId();
+
+	$orderItemQuery = $pdo->prepare(
+		'INSERT INTO order_items '
+		. '(order_id, product_id, product_name, unit_price, quantity) '
+		. 'VALUES (?, ?, ?, ?, ?)'
+	);
+	$stockQuery = $pdo->prepare('UPDATE products SET stock = stock - ? WHERE id = ?');
+
+	foreach ($items as $item) {
+		$orderItemQuery->execute([
+			$orderId,
+			$item['product_id'],
+			$item['name'],
+			$item['price'],
+			$item['quantity'],
+		]);
+		$stockQuery->execute([$item['quantity'], $item['product_id']]);
+	}
+
+	$deleteItemsQuery = $pdo->prepare('DELETE FROM cart_items WHERE cart_id = ?');
+	$deleteItemsQuery->execute([$cart['id']]);
+
+	$pdo->commit();
+	echo json_encode([
+		'message' => 'Pedido criado',
+		'order_id' => $orderId,
+	]);
+} catch (Throwable $exception) {
+	if ($pdo->inTransaction()) {
+		$pdo->rollBack();
+	}
+
+	http_response_code(422);
+	echo json_encode(['error' => $exception->getMessage()]);
+}

@@ -1,1 +1,29 @@
-<?php require_once __DIR__.'/../../config/database.php';header('Content-Type: application/json; charset=utf-8');$q=trim($_GET['q']??'');$cat=(int)($_GET['category_id']??0);$sql='SELECT p.*,c.name category FROM products p JOIN categories c ON c.id=p.category_id WHERE p.active=1';$params=[];if($q!==''){$sql.=' AND p.name LIKE ?';$params[]="%$q%";}if($cat){$sql.=' AND p.category_id=?';$params[]=$cat;}$sql.=' ORDER BY p.created_at DESC';$s=db()->prepare($sql);$s->execute($params);echo json_encode($s->fetchAll());
+<?php
+
+require_once __DIR__ . '/../../config/database.php';
+
+header('Content-Type: application/json; charset=utf-8');
+
+$query = trim($_GET['q'] ?? '');
+$categoryId = (int) ($_GET['category_id'] ?? 0);
+$sql = 'SELECT p.*, c.name AS category '
+	. 'FROM products p '
+	. 'JOIN categories c ON c.id = p.category_id '
+	. 'WHERE p.active = 1';
+$params = [];
+
+if ($query !== '') {
+	$sql .= ' AND p.name LIKE ?';
+	$params[] = "%$query%";
+}
+
+if ($categoryId) {
+	$sql .= ' AND p.category_id = ?';
+	$params[] = $categoryId;
+}
+
+$sql .= ' ORDER BY p.created_at DESC';
+$stmt = db()->prepare($sql);
+$stmt->execute($params);
+
+echo json_encode($stmt->fetchAll());

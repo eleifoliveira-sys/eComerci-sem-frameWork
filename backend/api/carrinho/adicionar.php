@@ -1,1 +1,51 @@
-<?php require_once __DIR__.'/../../config/database.php';session_start();header('Content-Type: application/json; charset=utf-8');if(empty($_SESSION['user_id'])){http_response_code(401);echo json_encode(['error'=>'Faça login para usar o carrinho']);exit;}$d=json_decode(file_get_contents('php://input'),true)??[];$pid=(int)($d['product_id']??0);$qty=max(1,(int)($d['quantity']??1));$pdo=db();$p=$pdo->prepare('SELECT * FROM products WHERE id=? AND active=1');$p->execute([$pid]);$prod=$p->fetch();if(!$prod){http_response_code(404);echo json_encode(['error'=>'Produto indisponível']);exit;}if($qty>$prod['stock']){http_response_code(422);echo json_encode(['error'=>'Quantidade maior que o estoque']);exit;}$pdo->beginTransaction();$c=$pdo->prepare('INSERT INTO carts(user_id) VALUES(?) ON DUPLICATE KEY UPDATE id=LAST_INSERT_ID(id)');$c->execute([$_SESSION['user_id']]);$cartId=(int)$pdo->lastInsertId();$s=$pdo->prepare('INSERT INTO cart_items(cart_id,product_id,quantity) VALUES(?,?,?) ON DUPLICATE KEY UPDATE quantity=LEAST(quantity+VALUES(quantity),?)');$s->execute([$cartId,$pid,$qty,$prod['stock']]);$pdo->commit();echo json_encode(['message'=>'Produto adicionado']);
+<?php
+
+require_once __DIR__ . '/../../config/database.php';
+
+session_start();
+header('Content-Type: application/json; charset=utf-8');
+
+if (empty($_SESSION['user_id'])) {
+	http_response_code(401);
+	echo json_encode(['error' => 'Faça login para usar o carrinho']);
+	exit;
+}
+
+$data = json_decode(file_get_contents('php://input'), true) ?? [];
+$productId = (int) ($data['product_id'] ?? 0);
+$quantity = max(1, (int) ($data['quantity'] ?? 1));
+$pdo = db();
+
+$productQuery = $pdo->prepare('SELECT * FROM products WHERE id = ? AND active = 1');
+$productQuery->execute([$productId]);
+$product = $productQuery->fetch();
+
+if (!$product) {
+	http_response_code(404);
+	echo json_encode(['error' => 'Produto indisponível']);
+	exit;
+}
+
+if ($quantity > $product['stock']) {
+	http_response_code(422);
+	echo json_encode(['error' => 'Quantidade maior que o estoque']);
+	exit;
+}
+
+$pdo->beginTransaction();
+
+$cartQuery = $pdo->prepare(
+	'INSERT INTO carts (user_id) VALUES (?) '
+	. 'ON DUPLICATE KEY UPDATE id = LAST_INSERT_ID(id)'
+);
+$cartQuery->execute([$_SESSION['user_id']]);
+$cartId = (int) $pdo->lastInsertId();
+
+$itemQuery = $pdo->prepare(
+	'INSERT INTO cart_items (cart_id, product_id, quantity) VALUES (?, ?, ?) '
+	. 'ON DUPLICATE KEY UPDATE quantity = LEAST(quantity + VALUES(quantity), ?)'
+);
+$itemQuery->execute([$cartId, $productId, $quantity, $product['stock']]);
+
+$pdo->commit();
+echo json_encode(['message' => 'Produto adicionado']);

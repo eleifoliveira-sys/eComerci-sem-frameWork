@@ -1,2 +1,48 @@
-async function carregarCarrinho(){const el=document.getElementById('cart');try{const c=await api('/carrinho/listar.php');el.innerHTML=c.items.length?c.items.map(i=>`<div class="border rounded p-3 mb-2 d-flex justify-content-between"><span>${i.name} x ${i.quantity}</span><strong>R$ ${Number(i.subtotal).toFixed(2).replace('.',',')}</strong></div>`).join('')+`<h3 class="mt-4">Total: R$ ${Number(c.total).toFixed(2).replace('.',',')}</h3><button class="btn btn-success" onclick="criarPedido()">Finalizar pedido</button>`:'<p>Seu carrinho está vazio.</p>'}catch(e){el.innerHTML=`<div class="alert alert-warning">${e.message}. <a href="login.html">Entrar</a></div>`}}
-async function criarPedido(){try{const r=await api('/pedidos/criar.php',{method:'POST'});alert('Pedido #'+r.order_id+' criado!');carregarCarrinho()}catch(e){alert(e.message)}}
+async function carregarCarrinho() {
+  const element = document.getElementById("cart");
+
+  try {
+    const cart = await api("/carrinho/listar.php");
+
+    if (!cart.items.length) {
+      element.innerHTML = "<p>Seu carrinho está vazio.</p>";
+      return;
+    }
+
+    const itemsHtml = cart.items
+      .map(
+        (item) => `
+				<div class="border rounded p-3 mb-2 d-flex justify-content-between">
+					<span>${item.name} x ${item.quantity}</span>
+					<strong>R$ ${Number(item.subtotal).toFixed(2).replace(".", ",")}</strong>
+				</div>
+			`,
+      )
+      .join("");
+
+    element.innerHTML = `${itemsHtml}
+			<h3 class="mt-4">
+				Total: R$ ${Number(cart.total).toFixed(2).replace(".", ",")}
+			</h3>
+			<button class="btn btn-success" onclick="criarPedido()">
+				Finalizar pedido
+			</button>
+		`;
+  } catch (error) {
+    element.innerHTML = `
+			<div class="alert alert-warning">
+				${error.message}. <a href="login.html">Entrar</a>
+			</div>
+		`;
+  }
+}
+
+async function criarPedido() {
+  try {
+    const result = await api("/pedidos/criar.php", { method: "POST" });
+    alert(`Pedido #${result.order_id} criado!`);
+    carregarCarrinho();
+  } catch (error) {
+    alert(error.message);
+  }
+}
