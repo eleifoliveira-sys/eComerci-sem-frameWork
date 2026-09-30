@@ -1,5 +1,4 @@
 # Tech Store
-
 ## Stack
 
 - Frontend: HTML, CSS, Bootstrap e JavaScript puro
