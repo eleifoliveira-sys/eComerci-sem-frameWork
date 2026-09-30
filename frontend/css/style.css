@@ -20,3 +20,26 @@ body {
     font-size: 1.8rem;
   }
 }
+
+body {
+  background: #f7f7f8;
+}
+
+.hero {
+  background: linear-gradient(135deg, #111, #343a40);
+  color: #fff;
+}
+
+.card {
+  border: 0;
+}
+
+.card h5 {
+  min-height: 48px;
+}
+
+@media (max-width: 576px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+}
