@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+<defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#f2f2f2"/><stop offset="1" stop-color="#e8e8e8"/></linearGradient></defs>
+<rect width="500" height="500" rx="35" fill="url(#g)"/>
+<circle cx="250" cy="215" r="110" fill="#fff"/><rect x="145" y="325" width="210" height="18" rx="9" fill="#fff"/>
+<text x="250" y="220" text-anchor="middle" font-family="Arial" font-size="30" font-weight="700" fill="#777">VIVA</text>
+</svg>

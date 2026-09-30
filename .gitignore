@@ -1,0 +1,10 @@
+# Credenciais e configuração local
+api/config.php
+.env
+.env.*
+
+# Dependências e arquivos gerados
+vendor/
+node_modules/
+*.log
+.DS_Store
