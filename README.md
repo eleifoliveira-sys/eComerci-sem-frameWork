@@ -1,79 +1,33 @@
-## Arquitetura do Projeto
+# Tech Store
 
-ecommerce/
-│
-├── docker-compose.yml
-├── .env
-├── README.md
-│
-├── frontend/
-│ ├── Dockerfile
-│ ├── nginx.conf
-│ │
-│ ├── index.html
-│ ├── produto.html
-│ ├── login.html
-│ ├── cadastro.html
-│ ├── carrinho.html
-│ └── checkout.html
-│ │
-│ ├── css/
-│ │ └── style.css
-│ │
-│ ├── js/
-│ │ ├── api.js
-│ │ ├── app.js
-│ │ ├── produtos.js
-│ │ ├── carrinho.js
-│ │ └── auth.js
-│ │
-│ └── assets/
-│ └── icons/
-│
-├── backend/
-│ ├── Dockerfile
-│ │
-│ ├── public/
-│ │ └── index.php
-│ │
-│ ├── config/
-│ │ └── database.php
-│ │
-│ ├── api/
-│ │ ├── auth/
-│ │ │ ├── login.php
-│ │ │ ├── cadastro.php
-│ │ │ └── logout.php
-│ │ │
-│ │ ├── produtos/
-│ │ │ ├── listar.php
-│ │ │ ├── buscar.php
-│ │ │ └── detalhes.php
-│ │ │
-│ │ ├── categorias/
-│ │ │ └── listar.php
-│ │ │
-│ │ ├── carrinho/
-│ │ │ ├── listar.php
-│ │ │ ├── adicionar.php
-│ │ │ ├── atualizar.php
-│ │ │ └── remover.php
-│ │ │
-│ │ └── pedidos/
-│ │ └── criar.php
-│ │
-│ └── uploads/
-│ └── produtos/
-│
-└── database/
-└── init.sql
+## Stack
 
-## Próxima etapa técnica
+- Frontend: HTML, CSS, Bootstrap e JavaScript puro
+- Backend: PHP 8.3, API REST simples e PDO
+- Banco: MySQL 8
+- Ambiente: Docker Compose
 
-1. Criar banco MySQL.
-2. Implementar PDO e prepared statements.
-3. Implementar cadastro/login com `password_hash()` e `password_verify()`.
-4. Criar CRUD de produtos/categorias.
-5. Persistir carrinho somente depois da autenticação.
-6. Criar checkout e pedidos.
-7. Adicionar painel administrativo.
+## Regras desta etapa
+
+- Visitantes podem navegar pelo catálogo.
+- Carrinho NÃO é salvo antes do login.
+- Para adicionar ao carrinho é necessário estar autenticado.
+- Cada usuário possui no máximo um carrinho.
+- O pedido baixa o estoque dentro de transação.
+- Status: aguardando_pagamento -> pago -> enviado -> entregue.
+- Cancelamento permitido antes do pagamento, com devolução do estoque.
+- Pagamento é simulado.
+
+## Subir
+
+```bash
+docker compose up --build
+```
+
+Frontend: http://localhost:8080
+API: http://localhost:8000
+MySQL: localhost:3307
+
+## Próximas implementações
+
+CRUD administrativo completo, atualização de quantidade, consulta de pedidos, transições protegidas de status, upload de imagens, validações e documentação da API.
