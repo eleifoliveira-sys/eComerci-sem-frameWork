@@ -1,5 +1,9 @@
 # Tech Store
 
+# Go Live
+
+Rode npm run dev e abra http://localhost:8000
+
 ## Stack
 
 - Frontend: HTML, CSS, Bootstrap e JavaScript puro
