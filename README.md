@@ -1,35 +1,76 @@
-# VIVA — referência de e-commerce
+## Arquitetura do Projeto
 
-Stack: HTML5 + CSS3 + JavaScript + PHP puro. Sem framework e sem hospedagem.
-
-## Rodar localmente
-
-Na pasta do projeto:
-
-```bash
-php -S localhost:8000
-```
-
-Abra:
-
-http://localhost:8000
-
-## Estrutura
-
-- `index.php` — front principal + catálogo demonstrativo
-- `assets/style.css` — layout responsivo
-- `assets/app.js` — busca, filtros e carrinho
-- `api/` — ponto de partida para autenticação, produtos, carrinho e pedidos
-
-## Decisão importante
-
-O carrinho do visitante é mantido apenas em memória JavaScript durante a sessão da página. Ele não é salvo no localStorage e não é gravado no banco antes do login.
-
-No backend real, após login, a sessão pode ser sincronizada com `cart_items` usando o `user_id`.
+ecommerce/
+│
+├── docker-compose.yml
+├── .env
+├── README.md
+│
+├── frontend/
+│ ├── Dockerfile
+│ ├── nginx.conf
+│ │
+│ ├── index.html
+│ ├── produto.html
+│ ├── login.html
+│ ├── cadastro.html
+│ ├── carrinho.html
+│ └── checkout.html
+│ │
+│ ├── css/
+│ │ └── style.css
+│ │
+│ ├── js/
+│ │ ├── api.js
+│ │ ├── app.js
+│ │ ├── produtos.js
+│ │ ├── carrinho.js
+│ │ └── auth.js
+│ │
+│ └── assets/
+│ └── icons/
+│
+├── backend/
+│ ├── Dockerfile
+│ │
+│ ├── public/
+│ │ └── index.php
+│ │
+│ ├── config/
+│ │ └── database.php
+│ │
+│ ├── api/
+│ │ ├── auth/
+│ │ │ ├── login.php
+│ │ │ ├── cadastro.php
+│ │ │ └── logout.php
+│ │ │
+│ │ ├── produtos/
+│ │ │ ├── listar.php
+│ │ │ ├── buscar.php
+│ │ │ └── detalhes.php
+│ │ │
+│ │ ├── categorias/
+│ │ │ └── listar.php
+│ │ │
+│ │ ├── carrinho/
+│ │ │ ├── listar.php
+│ │ │ ├── adicionar.php
+│ │ │ ├── atualizar.php
+│ │ │ └── remover.php
+│ │ │
+│ │ └── pedidos/
+│ │ └── criar.php
+│ │
+│ └── uploads/
+│ └── produtos/
+│
+└── database/
+└── init.sql
 
 ## Próxima etapa técnica
 
-1. Criar banco MySQL/MariaDB.
+1. Criar banco MySQL.
 2. Implementar PDO e prepared statements.
 3. Implementar cadastro/login com `password_hash()` e `password_verify()`.
 4. Criar CRUD de produtos/categorias.
