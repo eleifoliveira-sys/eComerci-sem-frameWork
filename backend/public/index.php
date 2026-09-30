@@ -25,7 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $uri = strtok($_SERVER['REQUEST_URI'], '?');
 
 match ($uri) {
-    '/api/users' => require __DIR__ . '/../src/api.php',
+    '/api/categorias' => require __DIR__ . '/../api/categorias/listar.php',
+    '/api/autorizacao/cad' => require __DIR__ . '/../api/auth/cadastro.php',
+    '/api/autorizacao/sessao' => require __DIR__ . '/../api/auth/sessao.php',
+
     default => notFound(),
 };
 
