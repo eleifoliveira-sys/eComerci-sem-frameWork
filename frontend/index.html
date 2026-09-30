@@ -14,6 +14,14 @@
     <nav class="navbar navbar-dark bg-dark">
       <div class="container">
         <a class="navbar-brand fw-bold" href="index.html">Tech Store</a>
+        <div class="d-flex gap-2 mb-4">
+        <input
+          id="busca"
+          class="form-control"
+          placeholder="Buscar produto..."
+        />
+        <button class="btn btn-dark" onclick="carregar()">Buscar</button>
+      </div>
         <div>
           <a class="btn btn-outline-light btn-sm me-2" href="login.html"
             >Entrar</a
@@ -29,15 +37,6 @@
         <p class="lead">
           Catálogo simples, carrinho autenticado e compra segura.
         </p>
-      </div>
-
-      <div class="d-flex gap-2 mb-4">
-        <input
-          id="busca"
-          class="form-control"
-          placeholder="Buscar produto..."
-        />
-        <button class="btn btn-dark" onclick="carregar()">Buscar</button>
       </div>
 
       <div id="produtos" class="row g-4"></div>
