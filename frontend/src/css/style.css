@@ -53,8 +53,8 @@ body { margin: 0; font-family: var(--fonte); color: var(--escuro); }
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding-top: 14px;
-  padding-bottom: 14px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .logo { display: inline-flex; flex-shrink: 0; }
@@ -161,7 +161,7 @@ body { margin: 0; font-family: var(--fonte); color: var(--escuro); }
   display: flex;
   align-items: center;
   gap: 24px;
-  padding-top: 10px;
+  padding-top: 6px;
   padding-bottom: 12px;
   overflow-x: auto;
   white-space: nowrap;
@@ -192,7 +192,7 @@ body { margin: 0; font-family: var(--fonte); color: var(--escuro); }
 
   .header-aviso { font-size: 0.75rem; }
 
-  .header-topo { padding-top: 10px; padding-bottom: 10px; }
+  .header-topo { padding-top: 6px; padding-bottom: 6px; }
 
   /* Só ícones: esconde o texto "Entrar" e "Carrinho" */
   .btn-conta .rotulo { display: none; }
