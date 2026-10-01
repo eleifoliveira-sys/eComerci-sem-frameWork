@@ -224,7 +224,6 @@ body.bg-light {
 
 @media (max-width: 768px) {
   /* A busca some no mobile */
-  .busca { display: none; }
 
   .header-aviso { font-size: 0.75rem; }
 
@@ -243,8 +242,16 @@ body.bg-light {
   .logo svg { width: 120px; height: 28px; }
 }
 
-@media (min-width: 768px) {
-  #search {
+.btnsearch1 {
     display: none;
-  }
+}
+
+.btnsearch0 {
+}
+
+.btnbar0{
+  display: none;
+}
+
+.btnbar1{
 }

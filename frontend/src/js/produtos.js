@@ -34,3 +34,22 @@ async function carregar() {
     console.error(error);
   }
 }
+
+
+const botao = document.getElementById("search");
+
+const sbar = document.getElementById("busca");
+
+if (window.innerWidth <= 768) {
+	sbar.classList.toggle("btnbar0");
+
+
+  botao.addEventListener("click", function (event) {
+    botao.classList.toggle("btnsearch0");
+    sbar.classList.toggle("btnbar0");
+  });
+}
+	else if(window.innerWidth > 768) {
+		sbar.classList.toggle("btnbar01");
+	}
+
