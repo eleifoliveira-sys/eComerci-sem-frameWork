@@ -118,6 +118,7 @@ body { margin: 0; font-family: var(--fonte); color: var(--escuro); }
   font-weight: 600;
   font-size: 0.875rem;
   color: var(--escuro);
+  text-decoration: none;
   background: transparent;
   border: 0;
   border-radius: 12px;
@@ -199,9 +200,17 @@ body { margin: 0; font-family: var(--fonte); color: var(--escuro); }
   .badge { left: auto; right: 2px; }
 
   .menu-categorias { gap: 20px; }
+
+
 }
 
 /* ---------- Celulares pequenos ---------- */
 @media (max-width: 400px) {
   .logo svg { width: 120px; height: 28px; }
+}
+
+@media (min-width: 768px) {
+  #search {
+    display: none;
+  }
 }
