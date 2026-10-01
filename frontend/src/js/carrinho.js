@@ -2,7 +2,7 @@ async function carregarCarrinho() {
   const element = document.getElementById("cart");
 
   try {
-    const cart = await api("/carrinho/listar.php");
+    const cart = await api("/carrinho");
 
     if (!cart.items.length) {
       element.innerHTML = "<p>Seu carrinho está vazio.</p>";
