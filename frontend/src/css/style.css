@@ -1,76 +1,207 @@
 :root {
-  --fundo: #eef1f5;
-  --card: #ffffff;
-  --borda: #e3e7ed;
-  --texto: #1c2230;
-  --link: #4a5263;
-  --azul: #3157f5;
-}
- 
-* { box-sizing: border-box; margin: 0; padding: 0; }
- 
-body {
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--fundo);
-  color: var(--texto);
-  padding: 16px;
-}
- 
-
-.hero {
-    background: linear-gradient(135deg, #111, #343a40);
-    color: #fff;
+  --azul: #2F5BFF;
+  --escuro: #0B1020;
+  --lima: #C6F432;
+  --borda: #E3E6EF;
+  --fundo-input: #F3F5FA;
+  --fonte: "Manrope", Arial, sans-serif;
 }
 
-.card {
-    border: 0;
+* { box-sizing: border-box; }
+
+body { margin: 0; font-family: var(--fonte); color: var(--escuro); }
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
 }
 
-.card h5 {
-    min-height: 48px;
+/* Acessibilidade: texto só para leitores de tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-@media (max-width: 576px) {
-    .hero h1 {
-        font-size: 1.8rem;
-    }
-}
-.acoes button:hover,
-.acoes a:hover { color: var(--azul); }
-.acoes svg { width: 22px; height: 22px; }
- 
-:focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
- 
-/* Responsivo */
-@media (max-width: 770px) {
-  .header { padding: 12px 16px; }
-  .menu { display: none; }
-  .acoes { margin-right: auto; }
-  .navbar .container { flex-wrap: wrap; }
-  .search-car{
-    display: none;
-  }
-  .searchbar-button{
-    display: flex;
-    flex: 1 0 100%;
-  }
-  .searchbar-button input { min-width: 0; flex: 1; }
-} 
-
-@media (min-width: 770px){
-  .acoes {
-    display: none;
-  }
+/* ---------- Header ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  border-bottom: 1px solid var(--borda);
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
+.header-aviso {
+  background: var(--escuro);
+  color: #fff;
+  font-size: 0.8125rem;
+  text-align: center;
+  padding: 8px 16px;
 }
 
-.searchbar-button {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  margin-bottom: 0;
+.header-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.logo { display: inline-flex; flex-shrink: 0; }
+.logo svg { display: block; }
+
+/* ---------- Busca ---------- */
+.busca {
+  position: relative;
+  flex: 1;
+  max-width: 560px;
+}
+
+.busca-icone {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+  fill: none;
+  stroke: #6B7280;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+.busca input {
+  width: 100%;
+  height: 44px;
+  padding: 0 16px 0 44px;
+  font: inherit;
+  font-size: 0.9375rem;
+  background: var(--fundo-input);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.busca input:focus {
+  background: #fff;
+  border-color: var(--azul);
+}
+
+/* ---------- Conta / Carrinho ---------- */
+.conta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-conta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--escuro);
+  background: transparent;
+  border: 0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-conta:hover { background: var(--fundo-input); }
+
+.btn-conta svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.badge {
+  position: absolute;
+  top: 2px;
+  left: 26px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  line-height: 18px;
+  text-align: center;
+  color: var(--escuro);
+  background: var(--lima);
+  border-radius: 999px;
+}
+
+.badge[hidden] { display: none; }
+
+/* ---------- Menu de categorias ---------- */
+.menu-categorias {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-top: 10px;
+  padding-bottom: 12px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.menu-categorias::-webkit-scrollbar { display: none; }
+
+.menu-categorias a {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--escuro);
+  text-decoration: none;
+}
+
+.menu-categorias a:hover { color: var(--azul); }
+.menu-categorias .ofertas { color: var(--azul); }
+
+/* ---------- Tablet ---------- */
+@media (max-width: 992px) {
+  .header-topo { gap: 16px; }
+  .btn-conta { padding: 10px; }
+}
+
+/* ---------- Mobile: a busca some ---------- */
+@media (max-width: 768px) {
+  .busca { display: none; }
+
+  .header-aviso { font-size: 0.75rem; }
+
+  .header-topo { padding-top: 10px; padding-bottom: 10px; }
+
+  /* Só ícones: esconde o texto "Entrar" e "Carrinho" */
+  .btn-conta .rotulo { display: none; }
+
+  .badge { left: auto; right: 2px; }
+
+  .menu-categorias { gap: 20px; }
+}
+
+/* ---------- Celulares pequenos ---------- */
+@media (max-width: 400px) {
+  .logo svg { width: 120px; height: 28px; }
 }
