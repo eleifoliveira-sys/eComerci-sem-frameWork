@@ -16,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Protótipo acadêmico: token simples em sessão PHP.
     session_start();
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['role'] = $user['role'];
@@ -30,15 +29,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'role' => $user['role'],
         ],
     ]);
+
 } elseif ($_SERVER["REQUEST_METHOD"] == "DELETE") {
     session_start();
     session_destroy();
 
     echo json_encode(['message' => 'Logout realizado']);
 } elseif ($_SERVER['REQUEST_METHOD'] == "GET") {
-    session_start();
 
-    echo json_encode(["logado" => !empty($_SESSION['user_id'])]);
+    $helper = null;
+
+    session_start();
+    if(isset($_SESSION['user_id'])){
+        $stmt = db()->prepare("SELECT name FROM users WHERE id = ?");
+        $stmt->execute([$_SESSION['user_id']]);
+        $res = $stmt->fetch();
+        $helper = $res['name'];
+    }
+
+    echo json_encode(["usuario" => $helper]);
 } else {
     http_response_code(405);
     header("Allow: GET, POST, DELETE");

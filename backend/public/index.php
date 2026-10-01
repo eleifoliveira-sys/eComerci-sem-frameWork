@@ -31,6 +31,7 @@ match ($uri) {
     '/api/autorizacao/sessao' => require __DIR__ . '/../api/auth/sessao.php',
     '/api/pedidos' => require __DIR__ . '/../api/pedidos/criar.php',
     '/api/carrinho' => require __DIR__ . '/../api/carrinho/httpHandler.php',
+    '/api/produtos' => require __DIR__ . '/../api/produtos/handler.php',
     default => notFound(),
 };
 
@@ -38,5 +39,5 @@ function notFound(): void
 {
     global $uri;
     http_response_code(403);
-    echo json_encode(['error' => 'Not found', 'uri' => $uri]);
+    echo json_encode(['error' => 'Not found']);
 }
