@@ -4,6 +4,10 @@ async function carregarCarrinho() {
   try {
     const cart = await api("/carrinho");
 
+    if (!cart || !Array.isArray(cart.items)) {
+      throw new Error("Faça login para ver o seu carrinho");
+    }
+
     if (!cart.items.length) {
       element.innerHTML = "<p>Seu carrinho está vazio.</p>";
       return;
@@ -29,9 +33,14 @@ async function carregarCarrinho() {
 			</button>
 		`;
   } catch (error) {
+    const mensagem =
+      error instanceof TypeError
+        ? "Não foi possível carregar o carrinho"
+        : error.message;
+
     element.innerHTML = `
 			<div class="alert alert-warning">
-				${error.message}. <a href="login.html">Entrar</a>
+				${mensagem}. <a href="login.html">Entrar</a>
 			</div>
 		`;
   }
