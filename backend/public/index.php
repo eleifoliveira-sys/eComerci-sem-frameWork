@@ -29,12 +29,14 @@ match ($uri) {
     '/api/categorias' => require __DIR__ . '/../api/categorias/listar.php',
     '/api/autorizacao/cad' => require __DIR__ . '/../api/auth/cadastro.php',
     '/api/autorizacao/sessao' => require __DIR__ . '/../api/auth/sessao.php',
-
+    '/api/pedidos' => require __DIR__ . '/../api/pedidos/criar.php',
+    '/api/carrinho' => require __DIR__ . '/../api/carrinho/httpHandler.php',
     default => notFound(),
 };
 
 function notFound(): void
 {
-    http_response_code(404);
-    echo json_encode(['error' => 'Not found']);
+    global $uri;
+    http_response_code(403);
+    echo json_encode(['error' => 'Not found', 'uri' => $uri]);
 }

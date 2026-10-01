@@ -35,8 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     session_destroy();
 
     echo json_encode(['message' => 'Logout realizado']);
+} elseif ($_SERVER['REQUEST_METHOD'] == "GET") {
+    session_start();
+
+    echo json_encode(["logado" => !empty($_SESSION['user_id'])]);
 } else {
     http_response_code(405);
-    header("Allow: POST, DELETE");
-    echo json_encode(['message' => 'Não se pode lêr ou editar sessões.']);
+    header("Allow: GET, POST, DELETE");
+    echo json_encode(['message' => 'Não se pode editar sessões.']);
 }
