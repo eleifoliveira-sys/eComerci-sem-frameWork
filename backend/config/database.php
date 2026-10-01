@@ -1,6 +1,9 @@
-    <?php
+<?php
+
 declare(strict_types=1);
-function db(): PDO {
+
+function db(): PDO
+{
     static $pdo = null;
     if ($pdo === null) {
         $pdo = new PDO(
