@@ -42,16 +42,19 @@ body {
 :focus-visible { outline: 3px solid #f59e0b; outline-offset: 2px; }
  
 /* Responsivo */
-@media (max-width: 720px) {
+@media (max-width: 770px) {
   .header { padding: 12px 16px; }
   .menu { display: none; }
-  .acoes { margin-left: auto; }
+  .acoes { margin-right: auto; }
   .search-car{
+    display: none;
+  }
+  .searchbar-button{
     display: none;
   }
 } 
 
-@media (min-width: 720px){
+@media (min-width: 770px){
   .acoes {
     display: none;
   }
