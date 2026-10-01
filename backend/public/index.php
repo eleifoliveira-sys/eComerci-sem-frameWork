@@ -25,6 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 // ajuda aqui e no options
 $uri = strtok($_SERVER['REQUEST_URI'], '?');
 
+$productId = null;
+if(preg_match('#^/api/produtos/(\d+)#', $uri, $matches)){
+    $productId = (int)$matches[1];
+    $uri = '/api/produtos';
+}
+
 match ($uri) {
     '/api/categorias' => require __DIR__ . '/../api/categorias/listar.php',
     '/api/autorizacao/cad' => require __DIR__ . '/../api/auth/cadastro.php',

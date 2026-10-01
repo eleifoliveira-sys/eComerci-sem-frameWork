@@ -37,15 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo json_encode(['message' => 'Logout realizado']);
 } elseif ($_SERVER['REQUEST_METHOD'] == "GET") {
-
-    $helper = null;
-
     session_start();
-    if(isset($_SESSION['user_id'])){
-        $helper = $_SESSION['username'];
-    }
-
-    echo json_encode(["usuario" => $helper]);
+    echo json_encode(["usuario" => !empty($_SESSION['user_id'])]);
 } else {
     http_response_code(405);
     header("Allow: GET, POST, DELETE");
