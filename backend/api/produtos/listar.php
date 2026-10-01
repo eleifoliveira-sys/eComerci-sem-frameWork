@@ -27,3 +27,4 @@ $stmt = db()->prepare($sql);
 $stmt->execute($params);
 
 echo json_encode($stmt->fetchAll());
+

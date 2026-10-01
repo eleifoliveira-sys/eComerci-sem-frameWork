@@ -4,16 +4,6 @@
 
 Rode npm run dev e abra http://localhost:8000
 
-# Usuário de Teste
-
-Usuário: TimeFront
-Email: emaildaempresa@gmail.com
-Senha: front123
-
-# Reclamações
-
-Consertem as mensagens de erro no login e cadastro. Se eu colocar nome de usuário no email ele nao diz nada e voce acaba quebrando a cabeça por algo simples
-
 ## Stack
 
 - Frontend: HTML, CSS, Bootstrap e JavaScript puro
