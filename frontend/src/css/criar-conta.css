@@ -300,6 +300,7 @@ body {
 
 .btn-conta {
   position: relative;
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -354,4 +355,227 @@ body {
 
 @media (max-width: 400px) {
   .logo svg { width: 120px; height: 28px; }
+}
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+.conta-card-login { max-width: 440px; }
+
+.link-alt {
+  margin: 28px 0 0;
+  text-align: center;
+  font-size: 0.9375rem;
+  color: var(--texto-suave);
+}
+
+.link-alt a {
+  font-weight: 700;
+  color: var(--azul);
+  text-decoration: none;
+}
+
+.link-alt a:hover { color: var(--azul-escuro); text-decoration: underline; }
+
+/* =========================================================
+   MENU DE CATEGORIAS (header do carrinho)
+   ========================================================= */
+.menu-categorias {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-top: 10px;
+  padding-bottom: 12px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.menu-categorias::-webkit-scrollbar { display: none; }
+
+.menu-categorias a {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--escuro);
+  text-decoration: none;
+}
+
+.menu-categorias a:hover { color: var(--azul); }
+.menu-categorias .ofertas { color: var(--azul); }
+
+@media (max-width: 768px) {
+  .menu-categorias { gap: 20px; }
+}
+
+/* =========================================================
+   CARRINHO (usa o Bootstrap + as variáveis acima)
+   Tudo escopado em #cart para estilizar o que o carrinho.js renderizar.
+   ========================================================= */
+main.container > h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+/* ---------- Cards / blocos (resumo, itens em card) ---------- */
+#cart .card {
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(11, 16, 32, 0.05);
+}
+
+/* ---------- Lista de itens (list-group) ---------- */
+#cart .list-group {
+  gap: 12px;
+}
+
+#cart .list-group-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 16px !important;
+}
+
+/* ---------- Tabela de itens ---------- */
+#cart .table {
+  --bs-table-bg: transparent;
+  margin: 0;
+  background: #fff;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(11, 16, 32, 0.05);
+}
+
+#cart .table thead th {
+  padding: 14px 16px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--escuro);
+  background: var(--fundo-input);
+  border-bottom: 1px solid var(--borda);
+}
+
+#cart .table td {
+  padding: 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--borda);
+}
+
+#cart .table tbody tr:last-child td { border-bottom: 0; }
+
+/* ---------- Textos ---------- */
+#cart h2,
+#cart h3,
+#cart h4,
+#cart h5 {
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+/* ---------- Campo de quantidade ---------- */
+#cart .form-control {
+  height: 40px;
+  font: inherit;
+  font-size: 0.9375rem;
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 6px;
+  box-shadow: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#cart .form-control:focus {
+  border-color: var(--azul);
+  box-shadow: 0 0 0 1px var(--azul);
+}
+
+/* ---------- Botões ---------- */
+#cart .btn {
+  font-family: var(--fonte);
+  font-weight: 700;
+  border-radius: 6px;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+}
+
+#cart .btn:active { transform: scale(0.98); }
+
+#cart .btn-dark,
+#cart .btn-primary,
+#cart .btn-success {
+  color: #fff;
+  background-color: var(--azul);
+  border-color: var(--azul);
+}
+
+#cart .btn-dark:hover,
+#cart .btn-dark:focus,
+#cart .btn-primary:hover,
+#cart .btn-primary:focus,
+#cart .btn-success:hover,
+#cart .btn-success:focus {
+  background-color: var(--azul-escuro);
+  border-color: var(--azul-escuro);
+}
+
+#cart .btn-outline-dark,
+#cart .btn-outline-primary,
+#cart .btn-outline-secondary {
+  color: var(--azul);
+  border-color: var(--azul);
+}
+
+#cart .btn-outline-dark:hover,
+#cart .btn-outline-primary:hover,
+#cart .btn-outline-secondary:hover {
+  color: #fff;
+  background-color: var(--azul);
+  border-color: var(--azul);
+}
+
+/* Remover item mantém o vermelho, só arredondado */
+#cart .btn-danger,
+#cart .btn-outline-danger { border-radius: 6px; }
+
+/* ---------- Carrinho vazio / mensagens ---------- */
+#cart .alert {
+  padding: 20px 24px;
+  font-weight: 600;
+  color: var(--escuro);
+  background: #fff;
+  border: 1px dashed var(--borda);
+  border-radius: 16px;
+}
+
+#cart .alert-danger {
+  color: #842029;
+  background: #fff5f5;
+  border: 1px solid #f1b9bd;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 768px) {
+  main.container > h1 { font-size: 1.5rem; }
+
+  #cart .list-group-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Tabela com rolagem horizontal, sem estourar a tela */
+  #cart .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }
