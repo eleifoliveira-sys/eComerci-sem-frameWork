@@ -1,9 +1,12 @@
-document.getElementById("login")?.addEventListener("submit", async (event) => {
+document.getElementById("login").addEventListener("submit", async (event) => {
   event.preventDefault();
 
   try {
-    await api("/auth/login.php", {
+    await api("/autorizacao/sessao", {
       method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         email: email.value,
         password: password.value,
@@ -16,13 +19,17 @@ document.getElementById("login")?.addEventListener("submit", async (event) => {
   }
 });
 
-document
-  .getElementById("cadastro")
-  ?.addEventListener("submit", async (event) => {
+const formCadastro = document.getElementById("cadastro");
+
+if(formCadastro){
+  formCadastro.addEventListener("submit", async (event) => {
     event.preventDefault();
+    const name = formCadastro.querySelector("#name");
+    const email = formCadastro.querySelector("#email");
+    const password = formCadastro.querySelector("#password");
 
     try {
-      await api("/auth/cadastro.php", {
+      await api("/autorizacao/cad", {
         method: "POST",
         body: JSON.stringify({
           name: name.value,
@@ -36,3 +43,4 @@ document
       msg.className = "alert alert-danger";
     }
   });
+}

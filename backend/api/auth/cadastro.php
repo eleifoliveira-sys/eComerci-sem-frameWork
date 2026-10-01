@@ -7,25 +7,27 @@ header('Content-Type: application/json; charset=utf-8');
 $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
 if (empty($data['name']) || empty($data['email']) || empty($data['password'])) {
-	http_response_code(422);
-	echo json_encode(['error' => 'Nome, e-mail e senha são obrigatórios']);
-	exit;
+    http_response_code(422);
+    echo json_encode($data);
+    /// echo json_encode(['error' => 'Nome, e-mail e senha são obrigatórios']);
+    exit;
 }
 
 $stmt = db()->prepare('SELECT id FROM users WHERE email = ?');
 $stmt->execute([$data['email']]);
 
 if ($stmt->fetch()) {
-	http_response_code(409);
-	echo json_encode(['error' => 'E-mail já cadastrado']);
-	exit;
+    http_response_code(409);
+    echo json_encode(['error' => 'E-mail já cadastrado']);
+    exit;
 }
 
 $stmt = db()->prepare('INSERT INTO users (name, email, password) VALUES (?, ?, ?)');
 $stmt->execute([
-	$data['name'],
-	$data['email'],
-	password_hash($data['password'], PASSWORD_DEFAULT),
+    $data['name'],
+    $data['email'],
+    password_hash($data['password'], PASSWORD_DEFAULT),
 ]);
 
+http_response_code(201);
 echo json_encode(['message' => 'Cadastro realizado com sucesso']);

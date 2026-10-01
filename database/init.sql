@@ -71,3 +71,4 @@ INSERT INTO products (category_id,name,description,price,stock,image) VALUES
 (3,'Mouse Wireless','Mouse sem fio ergonômico.',89.90,30,NULL),
 (3,'Teclado Mecânico','Teclado mecânico para produtividade.',249.90,20,NULL),
 (3,'Headset Gamer','Headset com microfone.',179.90,0,NULL);
+INSERT INTO users(name, email, password, role) VALUES ("TimeFront", "emaildaempresa@gmail.com", "$2y$10$lckezau8B/CM4mjIEf0u0OTwOkzrk4.nbwDhkkNdPdNFmoUHwxTBO", "admin");
