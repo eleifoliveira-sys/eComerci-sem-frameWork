@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     session_start();
     $_SESSION['user_id'] = $user['id'];
+    $_SESSION['username'] = $user['name'];
     $_SESSION['role'] = $user['role'];
 
     echo json_encode([
@@ -41,10 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     session_start();
     if(isset($_SESSION['user_id'])){
-        $stmt = db()->prepare("SELECT name FROM users WHERE id = ?");
-        $stmt->execute([$_SESSION['user_id']]);
-        $res = $stmt->fetch();
-        $helper = $res['name'];
+        $helper = $_SESSION['username'];
     }
 
     echo json_encode(["usuario" => $helper]);
