@@ -46,12 +46,15 @@ body {
   .header { padding: 12px 16px; }
   .menu { display: none; }
   .acoes { margin-right: auto; }
+  .navbar .container { flex-wrap: wrap; }
   .search-car{
     display: none;
   }
   .searchbar-button{
-    display: none;
+    display: flex;
+    flex: 1 0 100%;
   }
+  .searchbar-button input { min-width: 0; flex: 1; }
 } 
 
 @media (min-width: 770px){
