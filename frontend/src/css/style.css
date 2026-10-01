@@ -34,6 +34,7 @@ body {
     .hero h1 {
         font-size: 1.8rem;
     }
+
 }
 .acoes button:hover,
 .acoes a:hover { color: var(--azul); }
@@ -51,10 +52,15 @@ body {
     display: none;
   }
   .searchbar-button{
-    display: flex;
-    flex: 1 0 100%;
+    display: none !important;
   }
   .searchbar-button input { min-width: 0; flex: 1; }
+  .superior {
+    width: 300px;
+  }
+  .container {
+    padding: 0px;
+  }
 } 
 
 @media (min-width: 770px){
@@ -73,4 +79,12 @@ body {
     gap: 8px;
     align-items: center;
   margin-bottom: 0;
+}
+
+.navbar-dark {
+  height: 56px;
+}
+
+.container {
+    display: flex;
 }
