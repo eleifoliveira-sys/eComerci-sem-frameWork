@@ -365,8 +365,7 @@ body.bg-light {
   }
 }
 
-@media (min-width: 768px) {
-  #search {
+.btnsearch0 {
     display: none;
   }
 }

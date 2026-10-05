@@ -425,18 +425,13 @@ body {
 }
 
 @media (max-width: 400px) {
-  .logo svg {
-    width: 120px;
-    height: 28px;
-  }
+  .logo svg { width: 120px; height: 28px; }
 }
 
 /* =========================================================
    LOGIN
    ========================================================= */
-.conta-card-login {
-  max-width: 440px;
-}
+.conta-card-login { max-width: 440px; }
 
 .link-alt {
   margin: 28px 0 0;
@@ -451,10 +446,7 @@ body {
   text-decoration: none;
 }
 
-.link-alt a:hover {
-  color: var(--azul-escuro);
-  text-decoration: underline;
-}
+.link-alt a:hover { color: var(--azul-escuro); text-decoration: underline; }
 
 /* =========================================================
    MENU DE CATEGORIAS (header do carrinho)
@@ -470,9 +462,7 @@ body {
   scrollbar-width: none;
 }
 
-.menu-categorias::-webkit-scrollbar {
-  display: none;
-}
+.menu-categorias::-webkit-scrollbar { display: none; }
 
 .menu-categorias a {
   font-size: 0.875rem;
@@ -481,17 +471,11 @@ body {
   text-decoration: none;
 }
 
-.menu-categorias a:hover {
-  color: var(--azul);
-}
-.menu-categorias .ofertas {
-  color: var(--azul);
-}
+.menu-categorias a:hover { color: var(--azul); }
+.menu-categorias .ofertas { color: var(--azul); }
 
 @media (max-width: 768px) {
-  .menu-categorias {
-    gap: 20px;
-  }
+  .menu-categorias { gap: 20px; }
 }
 
 /* =========================================================
@@ -559,9 +543,7 @@ main.container > h1 {
   border-bottom: 1px solid var(--borda);
 }
 
-#cart .table tbody tr:last-child td {
-  border-bottom: 0;
-}
+#cart .table tbody tr:last-child td { border-bottom: 0; }
 
 /* ---------- Textos ---------- */
 #cart h2,
@@ -581,9 +563,7 @@ main.container > h1 {
   border: 1px solid var(--borda);
   border-radius: 6px;
   box-shadow: none;
-  transition:
-    border-color 0.2s,
-    box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 #cart .form-control:focus {
@@ -596,15 +576,10 @@ main.container > h1 {
   font-family: var(--fonte);
   font-weight: 700;
   border-radius: 6px;
-  transition:
-    background 0.2s,
-    border-color 0.2s,
-    transform 0.1s;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
 }
 
-#cart .btn:active {
-  transform: scale(0.98);
-}
+#cart .btn:active { transform: scale(0.98); }
 
 #cart .btn-dark,
 #cart .btn-primary,
@@ -641,9 +616,7 @@ main.container > h1 {
 
 /* Remover item mantém o vermelho, só arredondado */
 #cart .btn-danger,
-#cart .btn-outline-danger {
-  border-radius: 6px;
-}
+#cart .btn-outline-danger { border-radius: 6px; }
 
 /* ---------- Carrinho vazio / mensagens ---------- */
 #cart .alert {
@@ -663,9 +636,7 @@ main.container > h1 {
 
 /* ---------- Responsivo ---------- */
 @media (max-width: 768px) {
-  main.container > h1 {
-    font-size: 1.5rem;
-  }
+  main.container > h1 { font-size: 1.5rem; }
 
   #cart .list-group-item {
     flex-direction: column;
