@@ -3,6 +3,9 @@ services:
     build: ./frontend
     ports:
       - "8080:80"
+    volumes:
+      - ./backend/uploads/produtos:/usr/share/nginx/html/images/produtos:ro
+      - ./backend/api/estoque:/usr/share/nginx/html/images/estoque:ro
     depends_on:
       - backend
 

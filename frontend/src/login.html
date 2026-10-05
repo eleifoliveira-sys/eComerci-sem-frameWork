@@ -58,8 +58,8 @@
           <a
             class="btn-conta"
             href="login.html"
-            id="statusConta"
             aria-label="Entrar"
+            data-auth-link
           >
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
@@ -82,14 +82,33 @@
     <main class="pagina-conta">
       <section class="conta-card conta-card-login">
         <h1>Entrar na Tech Store</h1>
-        <p class="conta-sub">Informe seu e-mail e sua senha para acessar sua conta.</p>
+        <p class="conta-sub">
+          Informe seu e-mail e sua senha para acessar sua conta.
+        </p>
 
         <form id="login" class="conta-form">
-          <input id="email" type="email" placeholder="E-mail *" aria-label="E-mail" required />
+          <input
+            id="email"
+            type="email"
+            placeholder="E-mail *"
+            aria-label="E-mail"
+            required
+          />
 
           <div class="campo-senha">
-            <input id="password" type="password" placeholder="Senha *" aria-label="Senha" required />
-            <button type="button" class="btn-olho" id="btnOlho" aria-label="Mostrar senha">
+            <input
+              id="password"
+              type="password"
+              placeholder="Senha *"
+              aria-label="Senha"
+              required
+            />
+            <button
+              type="button"
+              class="btn-olho"
+              id="btnOlho"
+              aria-label="Mostrar senha"
+            >
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
                 <circle cx="12" cy="12" r="3" />
@@ -109,6 +128,18 @@
 
     <script src="js/api.js"></script>
     <script src="js/auth.js"></script>
-    <script src="js/session.js" type="module"></script>
+    <script>
+      // Mostrar / ocultar senha
+      const senha = document.getElementById("password");
+      document.getElementById("btnOlho").addEventListener("click", (e) => {
+        const mostrando = senha.type === "text";
+        senha.type = mostrando ? "password" : "text";
+        e.currentTarget.classList.toggle("ativo", !mostrando);
+        e.currentTarget.setAttribute(
+          "aria-label",
+          mostrando ? "Mostrar senha" : "Ocultar senha",
+        );
+      });
+    </script>
   </body>
 </html>
