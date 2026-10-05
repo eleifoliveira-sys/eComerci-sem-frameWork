@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $uri = strtok($_SERVER['REQUEST_URI'], '?');
 
 $productId = null;
-if(preg_match('#^/api/produtos/(\d+)#', $uri, $matches)){
+if (preg_match('#^/api/produtos/(\d+)#', $uri, $matches)) {
     $productId = (int)$matches[1];
     $uri = '/api/produtos';
 }
