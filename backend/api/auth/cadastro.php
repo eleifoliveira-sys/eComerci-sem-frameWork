@@ -8,8 +8,7 @@ $data = json_decode(file_get_contents('php://input'), true) ?? [];
 
 if (empty($data['name']) || empty($data['email']) || empty($data['password'])) {
     http_response_code(422);
-    echo json_encode($data);
-    /// echo json_encode(['error' => 'Nome, e-mail e senha são obrigatórios']);
+    echo json_encode(['error' => 'Nome, e-mail e senha são obrigatórios']);
     exit;
 }
 
