@@ -3,13 +3,17 @@
   const detalhe = document.getElementById("produto");
 
   function escapar(valor = "") {
-    return String(valor).replace(/[&<>"']/g, (caractere) => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;",
-    })[caractere]);
+    return String(valor).replace(
+      /[&<>"']/g,
+      (caractere) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[caractere],
+    );
   }
 
   function moeda(valor) {
@@ -17,6 +21,34 @@
       style: "currency",
       currency: "BRL",
     });
+  }
+
+  function imagemDoProduto(produto) {
+    if (produto.image) {
+      const imagem = String(produto.image).trim();
+      if (imagem.startsWith("data:")) {
+        return imagem;
+      }
+      const caminhoBackend = imagem.match(
+        /(?:uploads\/produtos|produtos)\/([^?#]+)/i,
+      );
+      if (caminhoBackend) {
+        return `/images/produtos/${caminhoBackend[1]
+          .split("/")
+          .map(encodeURIComponent)
+          .join("/")}`;
+      }
+      if (/^(https?:)?\/\//i.test(imagem)) return imagem;
+      if (imagem.startsWith("/images/")) return imagem;
+
+      const caminho = imagem.replace(/^\/+/, "");
+      const arquivo = caminho
+        .replace(/^backend\//i, "")
+        .replace(/^uploads\/produtos\//i, "")
+        .replace(/^produtos\//i, "");
+      return `/images/produtos/${encodeURIComponent(arquivo)}`;
+    }
+    return /mouse/i.test(produto.name) ? "/images/estoque/image.png" : "";
   }
 
   async function carregarCategorias() {
@@ -36,7 +68,9 @@
         const link = event.target.closest("[data-category-id]");
         if (!link) return;
         event.preventDefault();
-        menu.querySelectorAll("a").forEach((item) => item.classList.remove("ativo"));
+        menu
+          .querySelectorAll("a")
+          .forEach((item) => item.classList.remove("ativo"));
         link.classList.add("ativo");
         carregarProdutos();
       });
@@ -49,22 +83,25 @@
     if (!grid) return;
 
     const busca = document.getElementById("busca")?.value.trim() || "";
-    const categoriaId = document
-      .querySelector("#menuCategorias [data-category-id].ativo")
-      ?.dataset.categoryId;
+    const categoriaId = document.querySelector(
+      "#menuCategorias [data-category-id].ativo",
+    )?.dataset.categoryId;
     const parametros = new URLSearchParams();
     if (busca) parametros.set("q", busca);
     if (categoriaId) parametros.set("category_id", categoriaId);
 
     grid.innerHTML = '<p class="text-muted">Carregando produtos...</p>';
     try {
-      const produtos = await window.api(`/produtos${parametros.size ? `?${parametros}` : ""}`);
+      const produtos = await window.api(
+        `/produtos${parametros.size ? `?${parametros}` : ""}`,
+      );
       grid.innerHTML = produtos.length
         ? produtos
             .map(
               (produto) => `
                 <article class="col-12 col-sm-6 col-lg-4">
                   <div class="card h-100 shadow-sm">
+                      ${imagemDoProduto(produto) ? `<img class="card-img-top produto-imagem" src="${escapar(imagemDoProduto(produto))}" alt="${escapar(produto.name)}" loading="lazy">` : ""}
                     <div class="card-body d-flex flex-column">
                       <span class="badge text-bg-secondary align-self-start">${escapar(produto.category)}</span>
                       <h2 class="h5 mt-3">${escapar(produto.name)}</h2>
@@ -86,14 +123,16 @@
   async function carregarDetalhe() {
     const id = new URLSearchParams(window.location.search).get("id");
     if (!id || !/^\d+$/.test(id)) {
-      detalhe.innerHTML = '<p class="alert alert-warning">Produto inválido ou não informado.</p>';
+      detalhe.innerHTML =
+        '<p class="alert alert-warning">Produto inválido ou não informado.</p>';
       return;
     }
 
-    detalhe.innerHTML = '<p>Carregando produto...</p>';
+    detalhe.innerHTML = "<p>Carregando produto...</p>";
     try {
       const produto = await window.api(`/produtos/${encodeURIComponent(id)}`);
       detalhe.innerHTML = `
+        ${imagemDoProduto(produto) ? `<img class="produto-imagem produto-imagem-detalhe mb-4" src="${escapar(imagemDoProduto(produto))}" alt="${escapar(produto.name)}">` : ""}
         <span class="badge text-bg-secondary">${escapar(produto.category)}</span>
         <h1 class="mt-3">${escapar(produto.name)}</h1>
         <p>${escapar(produto.description || "")}</p>
@@ -104,44 +143,56 @@
         <button id="adicionarCarrinho" class="btn btn-dark" ${Number(produto.stock) < 1 ? "disabled" : ""}>Adicionar ao carrinho</button>
         <p id="produtoMsg" class="mt-3" role="status"></p>`;
 
-      document.getElementById("adicionarCarrinho").addEventListener("click", async () => {
-        const quantidade = document.getElementById("quantidade");
-        const mensagem = document.getElementById("produtoMsg");
-        const botao = document.getElementById("adicionarCarrinho");
-        const valor = Number(quantidade.value);
-        if (!Number.isInteger(valor) || valor < 1 || valor > Number(produto.stock)) {
-          mensagem.textContent = "Informe uma quantidade disponível em estoque.";
-          mensagem.className = "text-danger mt-3";
-          return;
-        }
-
-        botao.disabled = true;
-        try {
-          await window.api("/carrinho", {
-            method: "POST",
-            body: JSON.stringify({ product_id: Number(produto.id), quantity: valor }),
-          });
-          window.location.href = "carrinho.html";
-        } catch (error) {
-          if (error.status === 401) {
-            window.location.href = "login.html";
+      document
+        .getElementById("adicionarCarrinho")
+        .addEventListener("click", async () => {
+          const quantidade = document.getElementById("quantidade");
+          const mensagem = document.getElementById("produtoMsg");
+          const botao = document.getElementById("adicionarCarrinho");
+          const valor = Number(quantidade.value);
+          if (
+            !Number.isInteger(valor) ||
+            valor < 1 ||
+            valor > Number(produto.stock)
+          ) {
+            mensagem.textContent =
+              "Informe uma quantidade disponível em estoque.";
+            mensagem.className = "text-danger mt-3";
             return;
           }
-          mensagem.textContent = error.message;
-          mensagem.className = "text-danger mt-3";
-          botao.disabled = false;
-        }
-      });
+
+          botao.disabled = true;
+          try {
+            await window.api("/carrinho", {
+              method: "POST",
+              body: JSON.stringify({
+                product_id: Number(produto.id),
+                quantity: valor,
+              }),
+            });
+            window.location.href = "carrinho.html";
+          } catch (error) {
+            if (error.status === 401) {
+              window.location.href = "login.html";
+              return;
+            }
+            mensagem.textContent = error.message;
+            mensagem.className = "text-danger mt-3";
+            botao.disabled = false;
+          }
+        });
     } catch (error) {
       detalhe.innerHTML = `<p class="alert alert-danger" role="alert">${escapar(error.message)}</p>`;
     }
   }
 
   if (grid) {
-    document.getElementById("formBusca")?.addEventListener("submit", (event) => {
-      event.preventDefault();
-      carregarProdutos();
-    });
+    document
+      .getElementById("formBusca")
+      ?.addEventListener("submit", (event) => {
+        event.preventDefault();
+        carregarProdutos();
+      });
     document.getElementById("busca")?.addEventListener("input", () => {
       window.clearTimeout(window.buscaProdutosTimer);
       window.buscaProdutosTimer = window.setTimeout(carregarProdutos, 250);
