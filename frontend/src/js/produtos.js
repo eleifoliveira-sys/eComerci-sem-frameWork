@@ -45,11 +45,13 @@ if (window.innerWidth <= 768) {
 
 
   botao.addEventListener("click", function (event) {
+	botao.classList.remove("btnsearch1");
     botao.classList.toggle("btnsearch0");
     sbar.classList.toggle("btnbar0");
   });
 }
 	else if(window.innerWidth > 768) {
-		sbar.classList.toggle("btnbar01");
+		sbar.classList.toggle("btnbar1");
+		botao.classList.toggle("btnsearch0");
 	}
 
