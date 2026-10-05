@@ -23,6 +23,12 @@
     });
   }
 
+  function normalizarLista(resposta) {
+    if (Array.isArray(resposta)) return resposta;
+    if (Array.isArray(resposta?.data)) return resposta.data;
+    return [];
+  }
+
   function imagemDoProduto(produto) {
     if (produto.image) {
       const imagem = String(produto.image).trim();
@@ -33,7 +39,7 @@
         /(?:uploads\/produtos|produtos)\/([^?#]+)/i,
       );
       if (caminhoBackend) {
-        return `/images/produtos/${caminhoBackend[1]
+        return `/images/${caminhoBackend[1]
           .split("/")
           .map(encodeURIComponent)
           .join("/")}`;
@@ -46,7 +52,7 @@
         .replace(/^backend\//i, "")
         .replace(/^uploads\/produtos\//i, "")
         .replace(/^produtos\//i, "");
-      return `/images/produtos/${encodeURIComponent(arquivo)}`;
+      return `/images/${encodeURIComponent(arquivo)}`;
     }
     return /mouse/i.test(produto.name) ? "/images/estoque/image.png" : "";
   }
@@ -57,9 +63,11 @@
 
     try {
       const categorias = await window.api("/categorias");
+      const categoriasLista = normalizarLista(categorias);
+
       menu.innerHTML = [
         '<a href="#produtos" data-category-id="">Todas as categorias</a>',
-        ...categorias.map(
+        ...categoriasLista.map(
           (categoria) =>
             `<a href="#produtos" data-category-id="${Number(categoria.id)}">${escapar(categoria.name)}</a>`,
         ),
@@ -95,8 +103,10 @@
       const produtos = await window.api(
         `/produtos${parametros.size ? `?${parametros}` : ""}`,
       );
-      grid.innerHTML = produtos.length
-        ? produtos
+      const produtosLista = normalizarLista(produtos);
+
+      grid.innerHTML = produtosLista.length
+        ? produtosLista
             .map(
               (produto) => `
                 <article class="col-12 col-sm-6 col-lg-4">
