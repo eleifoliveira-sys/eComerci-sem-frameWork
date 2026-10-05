@@ -211,10 +211,6 @@ body.bg-light {
   color: var(--azul);
 }
 
-/* =========================================================
-   NAVBAR (antiga do Bootstrap, usada em login/cadastro/produto/carrinho)
-   Pode apagar esta seção quando todas as páginas usarem o .header novo.
-   ========================================================= */
 .navbar.bg-dark {
   background-color: var(--escuro) !important;
   padding: 14px 0;
