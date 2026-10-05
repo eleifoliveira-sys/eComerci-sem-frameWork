@@ -8,30 +8,66 @@
   </head>
   <body>
     <header class="header">
-      
       <div class="container header-topo">
-        <a href="index.html" class="logo" aria-label="Tech Store - página inicial">
-          <svg height="34" width="150" viewBox="0 0 212 48" role="img" aria-label="Tech Store">
-            <path d="M17 16V12.5a7 7 0 0 1 14 0V16" fill="none" stroke="#0B1020" stroke-width="3.5" stroke-linecap="round"/>
-            <rect x="7" y="15" width="34" height="28" rx="8" fill="#2F5BFF"/>
-            <path d="M16 24.5h16M24 24.5v6" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/>
-            <circle cx="24" cy="35.5" r="2.75" fill="#C6F432"/>
-            <text x="54" y="36" font-family="Manrope, Arial, sans-serif" font-size="28" letter-spacing="-1">
-              <tspan font-weight="800" fill="#0B1020">tech</tspan><tspan font-weight="500" fill="#2F5BFF">store</tspan>
+        <a
+          href="index.html"
+          class="logo"
+          aria-label="Tech Store - página inicial"
+        >
+          <svg
+            height="34"
+            width="150"
+            viewBox="0 0 212 48"
+            role="img"
+            aria-label="Tech Store"
+          >
+            <path
+              d="M17 16V12.5a7 7 0 0 1 14 0V16"
+              fill="none"
+              stroke="#0B1020"
+              stroke-width="3.5"
+              stroke-linecap="round"
+            />
+            <rect x="7" y="15" width="34" height="28" rx="8" fill="#2F5BFF" />
+            <path
+              d="M16 24.5h16M24 24.5v6"
+              fill="none"
+              stroke="#FFFFFF"
+              stroke-width="3.5"
+              stroke-linecap="round"
+            />
+            <circle cx="24" cy="35.5" r="2.75" fill="#C6F432" />
+            <text
+              x="54"
+              y="36"
+              font-family="Manrope, Arial, sans-serif"
+              font-size="28"
+              letter-spacing="-1"
+            >
+              <tspan font-weight="800" fill="#0B1020">tech</tspan>
+              <tspan font-weight="500" fill="#2F5BFF">store</tspan>
             </text>
           </svg>
         </a>
 
         <nav class="conta" aria-label="Conta">
-          <a class="btn-conta" href="login.html" aria-label="Entrar">
+          <a
+            class="btn-conta"
+            href="login.html"
+            aria-label="Entrar"
+            data-auth-link
+          >
             <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
             </svg>
             <span class="rotulo">Entrar</span>
           </a>
           <a class="btn-conta" href="carrinho.html" aria-label="Carrinho">
             <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+              <path d="M3 6h18" />
+              <path d="M16 10a4 4 0 0 1-8 0" />
             </svg>
             <span class="rotulo">Carrinho</span>
           </a>
@@ -43,12 +79,25 @@
     <main class="pagina-conta">
       <section class="conta-card">
         <h1>Criar minha conta</h1>
-        <p class="conta-sub">Informe os seus dados abaixo para criar sua conta.</p>
+        <p class="conta-sub">
+          Informe os seus dados abaixo para criar sua conta.
+        </p>
 
         <form id="cadastro" class="conta-form">
           <div class="linha-2">
-            <input id="name" type="text" placeholder="Nome" aria-label="Nome" required />
-            <input id="sobrenome" type="text" placeholder="Sobrenome" aria-label="Sobrenome" />
+            <input
+              id="name"
+              type="text"
+              placeholder="Nome"
+              aria-label="Nome"
+              required
+            />
+            <input
+              id="sobrenome"
+              type="text"
+              placeholder="Sobrenome"
+              aria-label="Sobrenome"
+            />
           </div>
 
           <div class="campo-select campo-metade">
@@ -60,15 +109,39 @@
           </div>
 
           <div class="linha-2">
-            <input id="cpf" type="text" inputmode="numeric" placeholder="CPF *" aria-label="CPF" required />
+            <input
+              id="cpf"
+              type="text"
+              inputmode="numeric"
+              placeholder="CPF *"
+              aria-label="CPF"
+              required
+            />
             <input id="rg" type="text" placeholder="RG" aria-label="RG" />
           </div>
 
-          <input id="email" type="email" placeholder="E-mail *" aria-label="E-mail" required />
+          <input
+            id="email"
+            type="email"
+            placeholder="E-mail *"
+            aria-label="E-mail"
+            required
+          />
 
           <div class="campo-senha">
-            <input id="password" type="password" placeholder="Senha *" aria-label="Senha" required />
-            <button type="button" class="btn-olho" id="btnOlho" aria-label="Mostrar senha">
+            <input
+              id="password"
+              type="password"
+              placeholder="Senha *"
+              aria-label="Senha"
+              required
+            />
+            <button
+              type="button"
+              class="btn-olho"
+              id="btnOlho"
+              aria-label="Mostrar senha"
+            >
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
                 <circle cx="12" cy="12" r="3" />
@@ -107,7 +180,10 @@
         const mostrando = senha.type === "text";
         senha.type = mostrando ? "password" : "text";
         e.currentTarget.classList.toggle("ativo", !mostrando);
-        e.currentTarget.setAttribute("aria-label", mostrando ? "Mostrar senha" : "Ocultar senha");
+        e.currentTarget.setAttribute(
+          "aria-label",
+          mostrando ? "Mostrar senha" : "Ocultar senha",
+        );
       });
     </script>
   </body>

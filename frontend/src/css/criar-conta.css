@@ -1,19 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;800&display=swap");
 
 :root {
-  --azul: #2F5BFF;
-  --azul-escuro: #2447D6;
-  --azul-claro: #E8EEFF;
-  --escuro: #0B1020;
-  --texto-suave: #5B6275;
-  --borda: #C5CCDD;
-  --cinza-fundo: #EEF0F4;
+  --azul: #2f5bff;
+  --azul-escuro: #2447d6;
+  --azul-claro: #e8eeff;
+  --escuro: #0b1020;
+  --texto-suave: #5b6275;
+  --borda: #c5ccdd;
+  --cinza-fundo: #eef0f4;
   --fonte: "Manrope", Arial, sans-serif;
 }
 
 *,
 *::before,
-*::after { box-sizing: border-box; }
+*::after {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -85,13 +87,19 @@ body {
   border: 1px solid var(--borda);
   border-radius: 6px;
   outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
-.conta-form input::placeholder { color: #7A8195; }
+.conta-form input::placeholder {
+  color: #7a8195;
+}
 
 .conta-form input:hover,
-.campo-select select:hover { border-color: #8E9ABB; }
+.campo-select select:hover {
+  border-color: #8e9abb;
+}
 
 .conta-form input:focus,
 .campo-select select:focus {
@@ -100,8 +108,12 @@ body {
 }
 
 /* ---------- Select com label flutuante ---------- */
-.campo-select { position: relative; }
-.campo-metade { width: calc(50% - 8px); }
+.campo-select {
+  position: relative;
+}
+.campo-metade {
+  width: calc(50% - 8px);
+}
 
 .campo-select label {
   position: absolute;
@@ -128,8 +140,12 @@ body {
 }
 
 /* ---------- Senha + olho ---------- */
-.campo-senha { position: relative; }
-.campo-senha input { padding-right: 52px !important; }
+.campo-senha {
+  position: relative;
+}
+.campo-senha input {
+  padding-right: 52px !important;
+}
 
 .btn-olho {
   position: absolute;
@@ -147,19 +163,23 @@ body {
   transition: background 0.2s;
 }
 
-.btn-olho:hover { background: var(--azul-claro); }
+.btn-olho:hover {
+  background: var(--azul-claro);
+}
 
 .btn-olho svg {
   width: 24px;
   height: 24px;
   fill: none;
-  stroke: #5B6275;
+  stroke: #5b6275;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
-.btn-olho.ativo svg { stroke: var(--azul); }
+.btn-olho.ativo svg {
+  stroke: var(--azul);
+}
 
 /* ---------- Checkboxes ---------- */
 .check {
@@ -178,10 +198,12 @@ body {
   margin: 1px 0 0;
   appearance: none;
   background: #fff;
-  border: 2px solid #5B6275;
+  border: 2px solid #5b6275;
   border-radius: 3px;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
 }
 
 .check input:checked {
@@ -201,7 +223,9 @@ body {
   text-decoration: underline;
 }
 
-.check a:hover { color: var(--azul); }
+.check a:hover {
+  color: var(--azul);
+}
 
 /* ---------- Botão ---------- */
 .btn-criar {
@@ -218,14 +242,22 @@ body {
   border-radius: 6px;
   box-shadow: 0 2px 6px rgba(47, 91, 255, 0.35);
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  transition:
+    background 0.2s,
+    transform 0.1s;
 }
 
-.btn-criar:hover { background: var(--azul-escuro); }
-.btn-criar:active { transform: scale(0.99); }
+.btn-criar:hover {
+  background: var(--azul-escuro);
+}
+.btn-criar:active {
+  transform: scale(0.99);
+}
 
 /* ---------- Mensagem + link ---------- */
-#msg:empty { display: none; }
+#msg:empty {
+  display: none;
+}
 
 #msg {
   padding: 12px 16px;
@@ -233,6 +265,15 @@ body {
   font-weight: 600;
   background: var(--azul-claro);
   border-radius: 8px;
+}
+
+.mensagem-erro {
+  color: #842029;
+  background: #f8d7da !important;
+}
+.mensagem-sucesso {
+  color: #0f5132;
+  background: #d1e7dd !important;
 }
 
 .voltar-login {
@@ -245,11 +286,17 @@ body {
   text-decoration: none;
 }
 
-.voltar-login:hover { color: var(--azul); text-decoration: underline; }
+.voltar-login:hover {
+  color: var(--azul);
+  text-decoration: underline;
+}
 
 /* ---------- Mobile ---------- */
 @media (max-width: 560px) {
-  .pagina-conta { padding: 0; align-items: flex-start; }
+  .pagina-conta {
+    padding: 0;
+    align-items: flex-start;
+  }
 
   .conta-card {
     padding: 32px 20px;
@@ -257,8 +304,13 @@ body {
     box-shadow: none;
   }
 
-  .linha-2 { grid-template-columns: 1fr; gap: 20px; }
-  .campo-metade { width: 100%; }
+  .linha-2 {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .campo-metade {
+    width: 100%;
+  }
 }
 
 /* =========================================================
@@ -288,8 +340,13 @@ body {
   padding-bottom: 14px;
 }
 
-.logo { display: inline-flex; flex-shrink: 0; }
-.logo svg { display: block; }
+.logo {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+.logo svg {
+  display: block;
+}
 
 .conta {
   display: flex;
@@ -316,7 +373,9 @@ body {
   transition: background 0.2s;
 }
 
-.btn-conta:hover { background: var(--azul-claro); }
+.btn-conta:hover {
+  background: var(--azul-claro);
+}
 
 .btn-conta svg {
   width: 22px;
@@ -340,17 +399,29 @@ body {
   line-height: 18px;
   text-align: center;
   color: var(--escuro);
-  background: #C6F432;
+  background: #c6f432;
   border-radius: 999px;
 }
 
-.btn-conta .badge[hidden] { display: none; }
+.btn-conta .badge[hidden] {
+  display: none;
+}
 
 @media (max-width: 768px) {
-  .header-topo { padding-top: 10px; padding-bottom: 10px; }
-  .btn-conta { padding: 10px; }
-  .btn-conta .rotulo { display: none; }
-  .btn-conta .badge { left: auto; right: 2px; }
+  .header-topo {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .btn-conta {
+    padding: 10px;
+  }
+  .btn-conta .rotulo {
+    display: none;
+  }
+  .btn-conta .badge {
+    left: auto;
+    right: 2px;
+  }
 }
 
 @media (max-width: 400px) {

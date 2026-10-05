@@ -15,9 +15,28 @@
       <div class="container">
         <a class="navbar-brand fw-bold" href="index.html">Tech Store</a>
         <div>
-          <a class="btn btn-outline-light btn-sm me-2" href="login.html"
-            >Entrar</a
+          <a
+            class="btn btn-outline-light btn-sm me-2"
+            href="login.html"
+            id="statusConta"
+            aria-label="Entrar"
           >
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span class="rotulo">Entrar</span>
+          </a>
           <a class="btn btn-primary btn-sm" href="carrinho.html">Carrinho</a>
         </div>
       </div>
@@ -27,6 +46,7 @@
       <div id="produto"></div>
     </main>
     <script src="js/api.js"></script>
+    <script src="js/session.js" type="module"></script>
     <script>
       async function load() {
         const productId = new URLSearchParams(location.search).get("id");

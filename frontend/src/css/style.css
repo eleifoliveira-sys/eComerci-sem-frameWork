@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;800&display=swap");
 
 :root {
-  --azul: #2F5BFF;
-  --azul-escuro: #2447D6;
-  --escuro: #0B1020;
-  --lima: #C6F432;
-  --borda: #E3E6EF;
-  --cinza-fundo: #EEF0F4;
-  --fundo-input: #F3F5FA;
+  --azul: #2f5bff;
+  --azul-escuro: #2447d6;
+  --escuro: #0b1020;
+  --lima: #c6f432;
+  --borda: #e3e6ef;
+  --cinza-fundo: #eef0f4;
+  --fundo-input: #f3f5fa;
   --fonte: "Manrope", Arial, sans-serif;
 }
 
@@ -16,7 +16,9 @@ body,
 body.bg-light {
   font-family: var(--fonte);
   color: var(--escuro);
-  background-color: var(--cinza-fundo) !important; /* !important: o Bootstrap usa nesse bg-light */
+  background-color: var(
+    --cinza-fundo
+  ) !important; /* !important: o Bootstrap usa nesse bg-light */
 }
 
 /* Acessibilidade: texto só para leitores de tela (o Bootstrap 5 não tem .sr-only) */
@@ -60,8 +62,13 @@ body.bg-light {
   padding-bottom: 8px;
 }
 
-.logo { display: inline-flex; flex-shrink: 0; }
-.logo svg { display: block; }
+.logo {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+.logo svg {
+  display: block;
+}
 
 /* ---------- Busca ---------- */
 .busca {
@@ -78,7 +85,7 @@ body.bg-light {
   height: 20px;
   transform: translateY(-50%);
   fill: none;
-  stroke: #6B7280;
+  stroke: #6b7280;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -95,7 +102,9 @@ body.bg-light {
   border: 2px solid transparent;
   border-radius: 999px;
   outline: none;
-  transition: border-color 0.2s, background 0.2s;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
 }
 
 .busca input:focus {
@@ -129,7 +138,17 @@ body.bg-light {
   transition: background 0.2s;
 }
 
-.btn-conta:hover { background: var(--fundo-input); }
+.btn-conta:hover {
+  background: var(--fundo-input);
+}
+
+#statusConta.logado {
+  color: #16803c;
+}
+
+.btn-conta.logado:hover {
+  background: #e9f7ed;
+}
 
 .btn-conta svg {
   width: 22px;
@@ -158,7 +177,9 @@ body.bg-light {
   border-radius: 999px;
 }
 
-.btn-conta .badge[hidden] { display: none; }
+.btn-conta .badge[hidden] {
+  display: none;
+}
 
 /* ---------- Menu de categorias ---------- */
 .menu-categorias {
@@ -172,7 +193,9 @@ body.bg-light {
   scrollbar-width: none;
 }
 
-.menu-categorias::-webkit-scrollbar { display: none; }
+.menu-categorias::-webkit-scrollbar {
+  display: none;
+}
 
 .menu-categorias a {
   font-size: 0.875rem;
@@ -218,28 +241,45 @@ body.bg-light {
    RESPONSIVO
    ========================================================= */
 @media (max-width: 992px) {
-  .header-topo { gap: 16px; }
-  .btn-conta { padding: 10px; }
+  .header-topo {
+    gap: 16px;
+  }
+  .btn-conta {
+    padding: 10px;
+  }
 }
 
 @media (max-width: 768px) {
   /* A busca some no mobile */
 
-  .header-aviso { font-size: 0.75rem; }
+  .header-aviso {
+    font-size: 0.75rem;
+  }
 
-  .header-topo { padding-top: 6px; padding-bottom: 6px; }
+  .header-topo {
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
 
   /* Só ícones */
-  .btn-conta .rotulo { display: none; }
-  .btn-conta .badge { left: auto; right: 2px; }
+  .btn-conta .rotulo {
+    display: none;
+  }
+  .btn-conta .badge {
+    left: auto;
+    right: 2px;
+  }
 
-  .menu-categorias { gap: 20px; }
-
-
+  .menu-categorias {
+    gap: 20px;
+  }
 }
 
 @media (max-width: 400px) {
-  .logo svg { width: 120px; height: 28px; }
+  .logo svg {
+    width: 120px;
+    height: 28px;
+  }
 }
 
 .btnsearch0 {
