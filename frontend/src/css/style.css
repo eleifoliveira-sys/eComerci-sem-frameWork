@@ -212,9 +212,12 @@ body.bg-light {
   text-decoration: none;
 }
 
-.menu-categorias a:hover { color: var(--azul); }
-.menu-categorias .ofertas { color: var(--preto); }
-
+.menu-categorias a:hover {
+  color: var(--azul);
+}
+.menu-categorias .ofertas {
+  color: var(--preto);
+}
 
 .navbar.bg-dark {
   background-color: var(--escuro) !important;
@@ -244,7 +247,6 @@ body.bg-light {
   border-color: var(--azul-escuro);
 }
 
-
 /* =========================================================
    RESPONSIVO
    ========================================================= */
@@ -259,6 +261,9 @@ body.bg-light {
 
 @media (max-width: 768px) {
   /* A busca some no mobile */
+  .busca {
+    display: none;
+  }
 
   .header-aviso {
     font-size: 0.75rem;
@@ -292,14 +297,5 @@ body.bg-light {
 
 .btnsearch0 {
     display: none;
-}
-
-.btnsearch1 {
-}
-
-.btnbar0{
-  display: none;
-}
-
-.btnbar1{
+  }
 }
