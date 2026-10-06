@@ -129,89 +129,25 @@
       grid.innerHTML = `<p class="alert alert-danger" role="alert">${escapar(error.message)}</p>`;
     }
   }
+}
 
-  async function carregarDetalhe() {
-    const id = new URLSearchParams(window.location.search).get("id");
-    if (!id || !/^\d+$/.test(id)) {
-      detalhe.innerHTML =
-        '<p class="alert alert-warning">Produto inválido ou não informado.</p>';
-      return;
-    }
 
-    detalhe.innerHTML = "<p>Carregando produto...</p>";
-    try {
-      const produto = await window.api(`/produtos/${encodeURIComponent(id)}`);
-      detalhe.innerHTML = `
-        ${imagemDoProduto(produto) ? `<img class="produto-imagem produto-imagem-detalhe mb-4" src="${escapar(imagemDoProduto(produto))}" alt="${escapar(produto.name)}">` : ""}
-        <span class="badge text-bg-secondary">${escapar(produto.category)}</span>
-        <h1 class="mt-3">${escapar(produto.name)}</h1>
-        <p>${escapar(produto.description || "")}</p>
-        <h2>${moeda(produto.price)}</h2>
-        <p>Estoque: ${Number(produto.stock)}</p>
-        <label for="quantidade" class="form-label">Quantidade</label>
-        <input id="quantidade" type="number" min="1" max="${Number(produto.stock)}" value="1" class="form-control mb-3" style="max-width: 120px" ${Number(produto.stock) < 1 ? "disabled" : ""}>
-        <button id="adicionarCarrinho" class="btn btn-dark" ${Number(produto.stock) < 1 ? "disabled" : ""}>Adicionar ao carrinho</button>
-        <p id="produtoMsg" class="mt-3" role="status"></p>`;
+const botao = document.getElementById("search");
 
-      document
-        .getElementById("adicionarCarrinho")
-        .addEventListener("click", async () => {
-          const quantidade = document.getElementById("quantidade");
-          const mensagem = document.getElementById("produtoMsg");
-          const botao = document.getElementById("adicionarCarrinho");
-          const valor = Number(quantidade.value);
-          if (
-            !Number.isInteger(valor) ||
-            valor < 1 ||
-            valor > Number(produto.stock)
-          ) {
-            mensagem.textContent =
-              "Informe uma quantidade disponível em estoque.";
-            mensagem.className = "text-danger mt-3";
-            return;
-          }
+const sbar = document.getElementById("busca");
 
-          botao.disabled = true;
-          try {
-            await window.api("/carrinho", {
-              method: "POST",
-              body: JSON.stringify({
-                product_id: Number(produto.id),
-                quantity: valor,
-              }),
-            });
-            window.location.href = "carrinho.html";
-          } catch (error) {
-            if (error.status === 401) {
-              window.location.href = "login.html";
-              return;
-            }
-            mensagem.textContent = error.message;
-            mensagem.className = "text-danger mt-3";
-            botao.disabled = false;
-          }
-        });
-    } catch (error) {
-      detalhe.innerHTML = `<p class="alert alert-danger" role="alert">${escapar(error.message)}</p>`;
-    }
-  }
+if (window.innerWidth <= 768) {
+	sbar.classList.toggle("btnbar0");
 
-  if (grid) {
-    document
-      .getElementById("formBusca")
-      ?.addEventListener("submit", (event) => {
-        event.preventDefault();
-        carregarProdutos();
-      });
-    document.getElementById("busca")?.addEventListener("input", () => {
-      window.clearTimeout(window.buscaProdutosTimer);
-      window.buscaProdutosTimer = window.setTimeout(carregarProdutos, 250);
-    });
-    document.getElementById("search")?.addEventListener("click", () => {
-      document.getElementById("busca")?.focus();
-    });
-    carregarCategorias().then(carregarProdutos);
-  }
 
-  if (detalhe) carregarDetalhe();
-})();
+  botao.addEventListener("click", function (event) {
+	botao.classList.remove("btnsearch1");
+    botao.classList.toggle("btnsearch0");
+    sbar.classList.toggle("btnbar0");
+  });
+}
+	else if(window.innerWidth > 768) {
+		sbar.classList.toggle("btnbar1");
+		botao.classList.toggle("btnsearch0");
+	}
+
