@@ -64,9 +64,9 @@ CREATE TABLE order_items (
 
 INSERT INTO categories (name) VALUES ('Notebooks'),('Celulares'),('Acessórios');
 INSERT INTO products (category_id,name,description,price,stock,image) VALUES
-(1,'Notebook Tech Pro','Notebook para estudos e trabalho.',3499.90,10,NULL),
-(1,'Notebook Tech Air','Modelo leve para produtividade.',2899.90,8,NULL),
-(2,'Smartphone Tech X','Smartphone com ótimo desempenho.',1999.90,15,NULL),
+(1,'Notebook Tech Pro','Notebook para estudos e trabalho.',3499.90,10,'../backend/public/images/image.png'),
+(1,'Notebook Tech Air','Modelo leve para produtividade.',2899.90,8,'image.png'),
+(2,'Smartphone Tech X','Smartphone com ótimo desempenho.',1999.90,15,'/var/www/html/public/images/image.png'),
 (2,'Smartphone Tech Mini','Compacto e eficiente.',1299.90,12,NULL),
 (3,'Mouse Wireless','Mouse sem fio ergonômico.',89.90,30,NULL),
 (3,'Teclado Mecânico','Teclado mecânico para produtividade.',249.90,20,NULL),
