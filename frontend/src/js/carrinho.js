@@ -16,12 +16,14 @@
     );
   }
 
-  function moeda(valor) {
-    return Number(valor).toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    });
-  }
+    if (!cart || !Array.isArray(cart.items)) {
+      throw new Error("Faça login para ver o seu carrinho");
+    }
+
+    if (!cart.items.length) {
+      element.innerHTML = "<p>Seu carrinho está vazio.</p>";
+      return;
+    }
 
   async function carregarCarrinho() {
     elemento.innerHTML = "<p>Carregando carrinho...</p>";
@@ -33,30 +35,27 @@
         return;
       }
 
-      elemento.innerHTML = `
-        <div class="table-responsive">
-          <table class="table align-middle">
-            <thead><tr><th>Produto</th><th>Quantidade</th><th>Subtotal</th><th></th></tr></thead>
-            <tbody>
-              ${carrinho.items
-                .map(
-                  (item) => `
-                    <tr>
-                      <td>${escapar(item.name)}</td>
-                      <td>${Number(item.quantity)}</td>
-                      <td>${moeda(item.subtotal)}</td>
-                      <td><button class="btn btn-outline-danger btn-sm" type="button" data-remover="${Number(item.id)}">Remover</button></td>
-                    </tr>`,
-                )
-                .join("")}
-            </tbody>
-          </table>
-        </div>
-        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
-          <h2 class="h4 mb-0">Total: ${moeda(carrinho.total)}</h2>
-          <button id="finalizarPedido" class="btn btn-success" type="button">Finalizar pedido</button>
-        </div>
-        <p id="cartMsg" class="mt-3" role="status"></p>`;
+    element.innerHTML = `${itemsHtml}
+			<h3 class="mt-4">
+				Total: R$ ${Number(cart.total).toFixed(2).replace(".", ",")}
+			</h3>
+			<button class="btn btn-success" onclick="criarPedido()">
+				Finalizar pedido
+			</button>
+		`;
+  } catch (error) {
+    const mensagem =
+      error instanceof TypeError
+        ? "Não foi possível carregar o carrinho"
+        : error.message;
+
+    element.innerHTML = `
+			<div class="alert alert-warning">
+				${mensagem}. <a href="login.html">Entrar</a>
+			</div>
+		`;
+  }
+}
 
       elemento.querySelectorAll("[data-remover]").forEach((botao) => {
         botao.addEventListener("click", async () => {
