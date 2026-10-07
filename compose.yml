@@ -3,12 +3,6 @@ services:
     build: ./frontend
     ports:
       - "8080:80"
-    volumes:
-      - ./backend/uploads/produtos:/usr/share/nginx/html/images/produtos:ro
-      - ./backend/api/estoque:/usr/share/nginx/html/images/estoque:ro
-    depends_on:
-      - backend
-
   backend:
     build: ./backend
     ports:
@@ -19,8 +13,6 @@ services:
       DB_NAME: tech_store
       DB_USER: techstore
       DB_PASSWORD: techstore
-    volumes:
-      - ./backend:/var/www/html
     depends_on:
       db:
         condition: service_healthy
@@ -42,6 +34,5 @@ services:
       interval: 5s
       timeout: 5s
       retries: 20
-
 volumes:
   mysql_data:

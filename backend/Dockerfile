@@ -16,6 +16,3 @@ COPY . /var/www/html/
 
 # Ajusta permissões do diretório de uploads (com verificação para evitar erros se a pasta não existir)
 RUN mkdir -p /var/www/html/uploads && chown -R www-data:www-data /var/www/html/uploads
-
-# Expõe a porta padrão do webserver
-EXPOSE 80
